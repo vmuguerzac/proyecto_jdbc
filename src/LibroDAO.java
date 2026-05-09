@@ -109,4 +109,32 @@ public class LibroDAO {
         return filas > 0;
     }
 
+    public Libro buscarPorISBN(String isbn){
+        Libro libroBuscar = null;
+        System.out.println("\n Buscar Libro por ISBN: ");
+        
+        String query = "SELECT * FROM libros WHERE isbn = ?";
+
+        try(PreparedStatement ps = conexion.prepareStatement(query)){
+            ps.setString(1, isbn);
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    return libroBuscar = new Libro(
+                        rs.getString("isbn"),
+                        rs.getString("titulo"),
+                        rs.getString("autor"),
+                        rs.getDouble("precio"),
+                        rs.getInt("stock")
+                    );
+                }
+            }catch(SQLException ex){
+                System.out.println("Error al momento de leer la informacion de libro de la BD." + ex.getMessage());    
+            }
+
+        }catch(SQLException ex){
+            System.out.println("Error al momento de executar el query de libro." + ex.getMessage());                    
+        }
+        return libroBuscar;
+    }
+
 }

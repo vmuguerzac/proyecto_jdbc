@@ -41,6 +41,12 @@ public class ConexionDemo {
                     isbn = CapturarISBN();
                     libroDAO.EliminarLibro(isbn);
                     break;
+                case 6:
+                    System.out.println("Ingrese ISBN a buscar");
+                    isbn = scanner.nextLine();
+                    libro = libroDAO.buscarPorISBN(isbn);
+                    System.out.println(libro.getTitulo());
+
                 default:
                     break;
             }
@@ -56,6 +62,7 @@ public class ConexionDemo {
         System.out.println("3. Leer Libros ");
         System.out.println("4. Actualizar Libro");
         System.out.println("5. Eliminar Libro");
+        System.out.println("6. Buscar por ISBN");
         System.out.println("-1. Salir del Sistema ");
     }
 
